@@ -1,4 +1,4 @@
-#define LOGHELPER_VERSION 3
+#define LOGHELPER_VERSION 4
 
 #include <sourcemod>
 #include <sdktools>
@@ -197,4 +197,21 @@ stock bool IsValidPlayer(int client)
 		return true;
 	}
 	return false;
+}
+
+stock bool IsValidTeamVictory(Event hEvent)
+{
+	if (hEvent == null)
+		return false;
+
+	char sEventName[64];
+	GetEventName(hEvent, sEventName, sizeof(sEventName));
+	if (strcmp(sEventName, "round_end") != 0)
+		return false;
+
+	// Winner event Reason: 1 = Draw, 2 = T, 3 = CT
+	if (hEvent.GetInt("winner") == 1)
+		return false;
+
+	return true;
 }
