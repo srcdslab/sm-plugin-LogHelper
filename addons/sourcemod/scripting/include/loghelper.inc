@@ -1,4 +1,4 @@
-#define LOGHELPER_VERSION 4
+#define LOGHELPER_VERSION 5
 
 #include <sourcemod>
 #include <sdktools>
@@ -205,7 +205,7 @@ stock bool IsValidTeamVictory(Event hEvent)
 		return false;
 
 	char sEventName[64];
-	GetEventName(hEvent, sEventName, sizeof(sEventName));
+	hEvent.GetName(sEventName, sizeof(sEventName));
 	if (strcmp(sEventName, "round_end") != 0)
 		return false;
 
